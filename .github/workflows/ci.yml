@@ -7,10 +7,6 @@ on:
     tags:
       - 'v*.*.*'
 
-env:
-  APP_NAME: buf
-  DOCKERHUB_USERNAME: kanziw
-
 jobs:
   docker:
     runs-on: ubuntu-20.04
@@ -26,8 +22,8 @@ jobs:
         uses: docker/metadata-action@v3
         with:
           images: |
-            ${{ github.repository_owner }}/$APP_NAME
-            ghcr.io/${{ github.repository_owner }}/$APP_NAME
+            ${{ github.repository_owner }}/buf
+            ghcr.io/${{ github.repository_owner }}/buf
           tags: |
             type=ref,event=branch
             type=ref,event=pr
