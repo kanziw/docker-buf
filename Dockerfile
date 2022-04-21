@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 bufbuild/buf:1.3.1
+FROM bufbuild/buf:1.3.1
 
 RUN apk add --update --no-cache \
       nodejs=16.14.2-r0 \
