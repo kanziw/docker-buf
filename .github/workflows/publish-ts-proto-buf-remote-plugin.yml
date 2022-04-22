@@ -1,0 +1,37 @@
+name: publish-ts-proto-buf-remote-plugin
+
+on:
+  workflow_dispatch:
+    inputs:
+      ts_proto_version:
+        description: 'Version of ts-proto. e.g. 1.110.4'
+        required: true
+
+env:
+  BUF_USER: kanziw
+  BUF_TOKEN: ${{ secrets.BUF_TOKEN }}
+
+jobs:
+  publish-ts-proto-buf-remote-plugin:
+    name: Publish ts-proto buf remote plugin
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          file: Dockerfile.tsproto
+          push: true
+          tags: plugins.buf.build/${BUF_USER}/ts-proto:v${{ github.event.inputs.ts_proto_version }}-0
+          build-args: ${{ github.event.inputs.ts_proto_version }}
+          platforms: linux/amd64,linux/arm64
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
