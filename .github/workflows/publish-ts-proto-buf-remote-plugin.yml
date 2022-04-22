@@ -25,12 +25,19 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
+      - name: Login to Buf Registry
+        uses: docker/login-action@v1 
+        with:
+          registry: plugins.buf.build
+          username: ${{ env.BUF_USER }}
+          password: ${{ secrets.BUF_TOKEN }}
+
       - name: Set up Buf
         uses: bufbuild/buf-setup-action@v1
         with:
           version: '1.4.0'
 
-      - name: Login to Buf Registry
+      - name: Login to Buf Registry with buf
         run: |
           echo ${BUF_TOKEN} | buf registry login --username ${BUF_USER} --token-stdin
 
