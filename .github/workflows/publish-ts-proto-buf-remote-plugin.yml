@@ -13,7 +13,7 @@ env:
 
 jobs:
   publish-ts-proto-buf-remote-plugin:
-    name: Publish ts-proto buf remote plugin
+    name: Publish ts-proto buf remote plugin with version ${{ github.event.inputs.ts_proto_version }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
