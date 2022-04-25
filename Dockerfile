@@ -7,6 +7,8 @@ RUN apk add --update --no-cache \
 
 ARG TS_PROTO_VERSION=1.110.4
 
+RUN echo "HIHI ${TS_PROTO_VERSION}"
+
 RUN npm i -g ts-proto@${TS_PROTO_VERSION}
 
 ENTRYPOINT ["/usr/local/bin/buf"]
