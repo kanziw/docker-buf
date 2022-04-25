@@ -38,7 +38,7 @@ jobs:
           file: Dockerfile.tsproto
           push: true
           tags: plugins.buf.build/${{ env.BUF_USER }}/ts-proto:v${{ github.event.inputs.ts_proto_version }}-0
-          build-args: ${{ github.event.inputs.ts_proto_version }}
+          build-args: TS_PROTO_VERSION=${{ github.event.inputs.ts_proto_version }}
           platforms: linux/amd64
           cache-from: type=gha
           cache-to: type=gha,mode=max
