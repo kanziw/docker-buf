@@ -5,7 +5,13 @@ on:
     inputs:
       ts_proto_version:
         description: 'Version of ts-proto. e.g. 1.110.4'
+        type: string
         required: true
+      buf_registry_patch_version:
+        description: 'Buf registry patch version'
+        type: number
+        required: false
+        default: 0
 
 env:
   BUF_USER: kanziw
@@ -37,7 +43,7 @@ jobs:
         with:
           file: Dockerfile.tsproto
           push: true
-          tags: plugins.buf.build/${{ env.BUF_USER }}/ts-proto:v${{ github.event.inputs.ts_proto_version }}-0
+          tags: plugins.buf.build/${{ env.BUF_USER }}/ts-proto:v${{ github.event.inputs.ts_proto_version }}-{{ github.event.inputs.buf_registry_patch_version }}
           build-args: TS_PROTO_VERSION=${{ github.event.inputs.ts_proto_version }}
           platforms: linux/amd64
           cache-from: type=gha
